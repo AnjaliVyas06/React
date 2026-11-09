@@ -1,0 +1,22 @@
+import React from "react";
+import ThemeContext from "./ThemeContext";
+
+
+const ThemeContextProvider = ({ children }) => {
+  const [theme, setTheme] = React.useState("light");
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+    React.useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+
+
+};
+
+export default ThemeContextProvider;
